@@ -4,9 +4,9 @@ import org.apache.spark.sql.streaming.Trigger
 import java.util.concurrent.TimeUnit
 
 object StreamApp {
-  val feNodes = "10.24.1.40:8030"
+  val feNodes = "xxxx:8030"
   val dorisUser = "root"
-  val dorisPwd = ""
+  val dorisPwd = "123"
   val dorisTable = "test.test_stream"
 
   def main(args: Array[String]): Unit = {

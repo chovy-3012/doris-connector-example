@@ -1,9 +1,9 @@
 import org.apache.spark.sql.SparkSession
 
 object BatchApp {
-  val feNodes = "10.24.1.40:8030"
+  val feNodes = "xxxx:8030"
   val dorisUser = "root"
-  val dorisPwd = ""
+  val dorisPwd = "123"
   val dorisTable = "test.test_batch"
 
   def main(args: Array[String]): Unit = {
