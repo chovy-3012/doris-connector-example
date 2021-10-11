@@ -14,9 +14,9 @@ object StreamApp {
       .getOrCreate()
     //create source from kafka
     val dataFrame = spark.readStream
-      .option("kafka.bootstrap.servers", "10.24.1.10:6667")
+      .option("kafka.bootstrap.servers", "xxxx:6667")
       .option("startingOffsets", "latest")
-      .option("subscribe", "asrlite")
+      .option("subscribe", "xxxx")
       .format("kafka")
       .option("failOnDataLoss", false)
       .load()
@@ -29,7 +29,7 @@ object StreamApp {
     //sink
     data.writeStream
       .format("doris")
-      .option("checkpointLocation", "/user/smart_etl/tmp/doris-test/ck")
+      .option("checkpointLocation", "/user/xxxx/tmp/doris-test/ck")
       //doris sink options
       .option("doris.table.identifier", dorisTable)
       .option("doris.fenodes", feNodes)
