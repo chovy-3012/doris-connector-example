@@ -4,19 +4,24 @@ import org.apache.spark.sql.streaming.Trigger
 import java.util.concurrent.TimeUnit
 
 object StreamApp {
+  //kafka
+  val kafkaServers = "xxxxx"
+  val kafkaTopic = "xxxxx"
+  //doris
   val feNodes = "xxxx:8030"
   val dorisUser = "root"
-  val dorisPwd = "123"
+  val dorisPwd = ""
   val dorisTable = "test.test_stream"
+  val checkpointLocation = "xxxxx"
 
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder()
       .getOrCreate()
     //create source from kafka
     val dataFrame = spark.readStream
-      .option("kafka.bootstrap.servers", "xxxx:6667")
+      .option("kafka.bootstrap.servers", kafkaServers)
       .option("startingOffsets", "latest")
-      .option("subscribe", "xxxx")
+      .option("subscribe", kafkaTopic)
       .format("kafka")
       .option("failOnDataLoss", false)
       .load()
@@ -29,7 +34,7 @@ object StreamApp {
     //sink
     data.writeStream
       .format("doris")
-      .option("checkpointLocation", "/user/xxxx/tmp/doris-test/ck")
+      .option("checkpointLocation", checkpointLocation)
       //doris sink options
       .option("doris.table.identifier", dorisTable)
       .option("doris.fenodes", feNodes)
